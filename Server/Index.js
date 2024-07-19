@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 let token = null
 let foldersObject = null
 
-app.post('/GetData/:token', (req, res) => {
+app.post('/api/SendData/:token', (req, res) => {
 
   token = req.params.token
   foldersObject = req.body
@@ -37,10 +37,10 @@ app.post('/GetData/:token', (req, res) => {
   setTimeout(() => {
     delete userData[token]
     console.log(`Token ${token} has been removed from the pool`)
-  }, 60000);
+  }, 300000); //5mins
 })
 
-app.get(`/Token/:dynamicToken`, (req, res) => {
+app.get(`/api/GetData/:dynamicToken`, (req, res) => {
   const dynamicToken = req.params.dynamicToken
 
   if (userData.hasOwnProperty(dynamicToken)) {
@@ -57,7 +57,7 @@ app.get(`/Token/:dynamicToken`, (req, res) => {
 
 })
 
-app.get('/test', (req, res) => {
+app.get('/api/list', (req, res) => {
   res.json(Object.keys(userData))
 })
 
